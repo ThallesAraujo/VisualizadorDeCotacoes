@@ -17,13 +17,14 @@ import com.thalles.teste.stock.dbservice.model.Cotacoes;
 import com.thalles.teste.stock.dbservice.repository.CotacoesRepository;
 
 @RestController
-@RequestMapping("/api/db")
+@RequestMapping("/db")
 public class DbServiceResource {
 	
 	@Autowired
 	private CotacoesRepository cotacoesRepository;
+
 	
-	@GetMapping("/{usuario}")
+	@GetMapping("/cotacao/{usuario}")
 	public List<String> getCotacoes(@PathVariable("usuario") final String usuario){
 		
 		return getCotacoesPorUsuario(usuario);
@@ -36,7 +37,7 @@ public class DbServiceResource {
 			.collect(Collectors.toList());
 	}
 	
-	@PostMapping("/adicionar")
+	@PostMapping("/cotacao/adicionar")
 	public List<String> adicionarCotacao(@RequestBody final Cotacoes cotacoes){
 		
 		cotacoes.getCotacoes()
@@ -47,7 +48,7 @@ public class DbServiceResource {
 		return getCotacoesPorUsuario(cotacoes.getUsuario());
 	}
 	
-	@DeleteMapping("/remover/{usuario}")
+	@DeleteMapping("/cotacao/remover/{usuario}")
 	public List<String> removerCotacoes(@PathVariable("usuario") final String usuario){
 		List<Cotacao> cotacoes = cotacoesRepository.getByUsuario(usuario);
 		cotacoesRepository.deleteAll(cotacoes);

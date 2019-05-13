@@ -17,6 +17,11 @@ eureka:
 zuul:
   prefix: /api
   routes:
+    auth-service:
+      path: /auth/**
+      url: http://localhost:8302
+      strip-prefix: false
+      sensitive-headers: Cookie,Set-Cookie
     db-service:
       path: /db-service/**
       url: http://localhost:8300

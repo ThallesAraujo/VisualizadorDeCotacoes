@@ -21,7 +21,7 @@ import yahoofinance.YahooFinance;
 import yahoofinance.quotes.stock.*;
 
 @RestController
-@RequestMapping("/api/cotacao")
+@RequestMapping("/cotacao")
 public class StockResource {
 	
 	@Autowired
@@ -31,7 +31,7 @@ public class StockResource {
 	@GetMapping("/{usuario}")
 	public List<Cotacao> getCotacao(@PathVariable("usuario") final String usuario){
 		
-		ResponseEntity<List<String>> cotacaoResponse = restTemplate.exchange("http://db-service/api/db/"+usuario, 
+		ResponseEntity<List<String>> cotacaoResponse = restTemplate.exchange("http://db-service/db/cotacao/"+usuario, 
 				HttpMethod.GET,null, new ParameterizedTypeReference<List<String>>() {});
 		
 		List<String> cotacoes = cotacaoResponse.getBody();
