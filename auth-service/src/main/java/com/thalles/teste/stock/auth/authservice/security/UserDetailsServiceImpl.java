@@ -23,7 +23,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-		// hard coding the users. All passwords must be encoded.
 		Usuario usuario = repository.findById(email).get();
 		if (usuario != null) {
 			List<GrantedAuthority> grantedAuthorities = AuthorityUtils

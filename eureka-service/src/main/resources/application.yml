@@ -19,12 +19,24 @@ zuul:
   routes:
     auth-service:
       path: /auth/**
-      url: http://localhost:8302
+      serviceId: auth-service
       strip-prefix: false
       sensitive-headers: Cookie,Set-Cookie
     db-service:
       path: /db-service/**
-      url: http://localhost:8300
+      serviceId: db-service
     stock-service:
       path: /stock-service/**
-      url: http://localhost:8301
+      serviceId: stock-service
+            
+
+auth-service:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: localhost:8302
+    ConnectTimeout: 1000
+    ReadTimeout: 3000
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 100
+     
+      
